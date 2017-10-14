@@ -3,21 +3,32 @@ body{
 }
 
 #main-logo.logo{
-  width: 60vw;
-  margin: 0px auto 20px;
+  width: 100vw;
+  margin-bottom: 20px;
   text-align: center;
   font-size: 64px;
 }
 
 .form{
-  width: 50vw;
+  display: none;
+  width: 100vw;
   margin: 0px auto;
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.form.fading{
+  display: block;
+  opacity: 0;
+}
+.form.enabled{
+  display: block;
+  opacity: 1;
 }
 .form-button{
-  width: calc(100% - 26px);
+  width: calc(80% - 46px);
   padding: 5px 10px;
-  margin: 10px 10px;
+  margin: 10px auto;
   border: 3px solid #000;
   text-transform: uppercase;
   font-size: 24px;

@@ -3,9 +3,17 @@
 <div id='main-logo' class='logo'>
   Bootlet
 </div>
-<div class='form'>
-  <div class='form-button'>Join Game</div>
-  <div class='form-button'>Create Game</div>
+<div class='form enabled' id='main'>
+  <div class='form-button' data-target='join-game'>Join Game</div>
+  <div class='form-button' data-target='create-game'>Create Game</div>
 </div>
+<div class='form' id='join-game'>
+  <div class='form-button' data-target='main'>Back</div>
+</div>
+<div class='form' id='create-game'>
+  <div class='form-button' data-target='main'>Back</div>
+</div>
+
+<script src='/js/index.js'></script>
 
 <% include ../public/partials/footer %>
