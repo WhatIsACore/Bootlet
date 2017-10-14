@@ -4,6 +4,8 @@ var username = document.getElementById('username');
 var setUsername = document.getElementById('set-username');
 var voteReady = document.getElementById('vote-ready');
 var roomName = document.getElementById('room-name');
+var joinCode = document.getElementById('join-code');
+joinCode.innerHTML = 'Join Code: ' + params.room;
 var socket;
 
 var panels = document.getElementsByClassName('gamepanel');

@@ -30,10 +30,13 @@
   text-align: center;
 }
 
+.panel-info{
+  font-size: 24px;
+}
 .panel-heading{
   width: calc(75%);
   margin: 0px auto 20px;
-  font-size: 32px;
+  font-size: 24px;
   text-align: center;
   font-family: 'rye';
 }

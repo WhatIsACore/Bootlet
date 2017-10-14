@@ -29,7 +29,7 @@ app.use('/css', express.static('public/css'))
     .get('/create', routing.render('create', 'Create a Bootlet', 'create'))
     .get('/room/*', function(req, res, next){
       game.verify(routing.getPath(req.url), function(){
-        res.status(404).send('room not found');
+        res.status(404).redirect('/');
       }, function(){
         routing.render('room', 'In Game', 'room', {room: routing.getPath(req.url)})(req, res, next);
       });
