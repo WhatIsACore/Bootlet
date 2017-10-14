@@ -42,7 +42,7 @@ setUsername.addEventListener('click', function(){
         updatePlayers();
         roomName.innerHTML = roomname;
       }
-      players.push(id, username, false, true);
+      players.push(new Player(id, username, false, true));
     });
 
     socket.on('newplayer', function(id, username){
@@ -87,5 +87,5 @@ function updatePlayers(){
   for(var i = 0, j = players.length; i < j; i++){
     res += '<div class="player ' + players[i].vote + '">' + players[i].username + '</div>';
   }
-  playerlist.innerHTML = players;
+  playerlist.innerHTML = res;
 }
