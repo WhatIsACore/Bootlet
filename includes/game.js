@@ -18,11 +18,10 @@ Room.prototype.checkVotes = function(){
     for(var i = 0, j = this.players.length; i < j; i++){
       if(this.players[i].vote) votes++;
     }
-    logger.log('info', votes);
     if(votes === this.players.length){
       this.lobbystate = 1;
-      for(var i = 0, j = r.players.length; i < j; i++){
-        r.players[i].socket.emit('gamestarted');
+      for(var i = 0, j = this.players.length; i < j; i++){
+        this.players[i].socket.emit('gamestarted');
       }
     }
   }
