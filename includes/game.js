@@ -71,7 +71,7 @@ function connectClient(code, socket, username){
   socket.id = id;
   var r = rooms[code];
 
-  if(r && r.lobbystate === 0 && r.sockets.length < 5){
+  if(r && r.lobbystate === 0 && r.players.length < 5){
     r.players.push(socket);
 
     var currentPlayerList = [];
