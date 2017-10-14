@@ -46,7 +46,7 @@ setUsername.addEventListener('click', function(){
     });
 
     socket.on('newplayer', function(id, username){
-      players.push(new Player(id, username, false));
+      players.push(new Player(id, username, false, false));
       updatePlayers();
     });
 
