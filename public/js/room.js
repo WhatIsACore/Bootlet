@@ -68,7 +68,7 @@ setUsername.addEventListener('click', function(){
 
     socket.on('vote', function(id){
       for(var i = 0, j = players.length; i < j; i++){
-        var p = playerlist[i];
+        var p = players[i];
         if(p.id === id){
           players[i].vote = true;
           break;
@@ -84,6 +84,7 @@ setUsername.addEventListener('click', function(){
 });
 
 voteReady.addEventListener('click', function(){
+  voteReady.style.display = 'none';
   socket.emit('vote');
 });
 
