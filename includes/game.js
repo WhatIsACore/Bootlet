@@ -103,7 +103,7 @@ Room.prototype.evaluate = function(){
   });
   for(var i = 0, j = this.players.length; i < j; i++){
     var p = this.players[i];
-    if(p.score > 30){
+    if(p.score > 25){
       this.winner = p.id;
       break;
     }
@@ -121,12 +121,14 @@ Room.prototype.evaluate = function(){
 }
 Room.prototype.showResults = function(){
   var res = [];
-  for(var i = 0, j = this.players.length; i < j; i++)
+  for(var i = 0, j = this.players.length; i < j; i++){
+    var p = this.players[i];
     res.push({
       username: p.username,
       id: p.id,
       score: p.score
     });
+  }
   for(var i = 0, j = this.players.length; i < j; i++)
     this.players[i].socket.emit('results', res);
 }
