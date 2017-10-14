@@ -28,13 +28,14 @@ var playerlist = document.getElementById('playerlist');
 setUsername.addEventListener('click', function(){
   if(username.value.length > 0){
     socket = io();
-    socket.emit('joinroom', params.room, username.value);
+    var uname = username.value;
+    socket.emit('joinroom', params.room, uname);
 
     socket.on('joinfail', function(){
       changePanel('join-fail');
     });
 
-    socket.on('joinsuccess', function(currentplayerlist, id, username.value, roomname){
+    socket.on('joinsuccess', function(currentplayerlist, id, uname, roomname){
       console.log(currentplayerlist);
       for(var i = 0, j = playerlist.length; i < j; i++){
         var p = currentplayerlist[i];
@@ -43,7 +44,7 @@ setUsername.addEventListener('click', function(){
         updatePlayers();
         roomName.innerHTML = roomname;
       }
-      players.push(new Player(id, username.value, false, true));
+      players.push(new Player(id, uname, false, true));
     });
 
     socket.on('newplayer', function(id, name){
