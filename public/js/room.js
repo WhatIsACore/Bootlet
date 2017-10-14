@@ -17,7 +17,7 @@ var answers1 = document.getElementById('answers1');
 var question2 = document.getElementById('question2');
 var result2 = document.getElementById('result2');
 var desc2 = document.getElementById('desc2');
-var finalResults = document.getElementById('final-results');
+var finalResults = document.getElementById('results-fill-area');
 
 var panels = document.getElementsByClassName('gamepanel');
 function changePanel(target){
@@ -188,10 +188,10 @@ setUsername.addEventListener('click', function(){
       changePanel('final-results');
       clearInterval(interval);
 
-      var final = '';
+      var final = 'Final Results: <br><br>';
       for(var i in res){
         final += '<div class="rank">';
-        final += (i + 1) + '. ' + res[i].username + ' - ' + res[i].score;
+        final += (+(i) + 1) + '. ' + res[i].username + ' - ' + res[i].score;
         final += '</div>';
       }
 

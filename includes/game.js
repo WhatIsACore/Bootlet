@@ -103,7 +103,7 @@ Room.prototype.evaluate = function(){
   });
   for(var i = 0, j = this.players.length; i < j; i++){
     var p = this.players[i];
-    if(p.score > 25){
+    if(p.score > 3){
       this.winner = p.id;
       break;
     }
