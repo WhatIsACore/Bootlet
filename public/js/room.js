@@ -188,7 +188,7 @@ setUsername.addEventListener('click', function(){
       changePanel('final-results');
       clearInterval(interval);
 
-      var final = 'Final Results: <br><br>';
+      var final = '';
       for(var i in res){
         final += '<div class="rank">';
         final += (+(i) + 1) + '. ' + res[i].username + ' - ' + res[i].score;
