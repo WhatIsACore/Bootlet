@@ -40,7 +40,7 @@ Room.prototype.startPhase0 = function(){
   this.phase = 0;
   this.curquestion++;
   var d = Date.now();
-  var q = this.questions[this.curquestion];
+  var q = this.curquestion;
   this.timer = d;
 
   for(var i = 0, j = this.players.length; i < j; i++){
