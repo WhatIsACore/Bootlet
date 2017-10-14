@@ -88,6 +88,8 @@ Room.prototype.startPhase2 = function(){
       p.score += inc;
       p.socket.emit('phase2', true, rank, inc);
       tracker++;
+    } else {
+      p.socket.emit('phase2', false);
     }
   }
 
