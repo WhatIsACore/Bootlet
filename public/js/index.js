@@ -67,7 +67,7 @@ for(var i in buttons)
     buttons[i].addEventListener('click', function(){
       if(this.dataset.target){
         var enabled = document.getElementsByClassName('enabled')[0];
-        enabled.className = 'form fading';
+        if(enabled != null) enabled.className = 'form fading';
         target = this.dataset.target;
         setTimeout(function(){
           for(var i in forms)

@@ -123,6 +123,7 @@ setUsername.addEventListener('click', function(){
     });
 
     socket.on('phase1', function(answers, d){
+      console.log('phase1');
       changePhase('phase1');
       time = d;
       question1.innerHTML = questions[curq].question;
