@@ -1,7 +1,7 @@
 'use strict';
 
 var username = document.getElementById('username');
-setUsername = document.getElementById('set-username');
+var setUsername = document.getElementById('set-username');
 var socket;
 
 var panels = document.getElementsByClassName('gamepanel');
@@ -23,6 +23,7 @@ setUsername.addEventListener('click', function(){
   if(username.value.length > 0){
     socket = io();
     socket.emit('joinroom', params.code, username);
+    console.log('joining room');
 
     socket.on('joinfail', function(){
       changePanel('join-fail');
