@@ -118,8 +118,6 @@ setUsername.addEventListener('click', function(){
         var remainder = 3 - Math.floor((Date.now() - time) / 1000);
         if(remainder > -1){
           timer0.innerHTML = remainder;
-        } else {
-          clearInterval(interval);
         }
       }, 100);
     });
@@ -138,12 +136,11 @@ setUsername.addEventListener('click', function(){
       answers1.innerHTML = res;
 
       timer1.innerHTML = '';
+      clearInterval(inverval);
       interval = setInterval(function(){
         var remainder = 8 - Math.floor((Date.now() - time) / 1000);
         if(remainder > -1){
           timer1.innerHTML = remainder;
-        } else {
-          clearInterval(interval);
         }
       }, 100);
     });
