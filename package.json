@@ -23,6 +23,7 @@
     "foreman": "^2.0.0",
     "mongodb": "^2.2.33",
     "mongoose": "^4.12.1",
+    "socket.io": "^2.0.3",
     "winston": "^2.4.0"
   }
 }

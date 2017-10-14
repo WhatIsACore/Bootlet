@@ -11,7 +11,6 @@ mongoose.connect(config.mongodb_key, {
   reconnectTries: Number.MAX_VALUE,
   useMongoClient: true
 });
-setInterval(function(){console.log(mongoose.connection.readyState);}, 1000);
 var db_StudySets = require('./models/studysets');
 
 var express = require('express'),
@@ -49,6 +48,15 @@ app.use('/css', express.static('public/css'))
         res.status(200).send(room);
       });
     });
+
+var io = require('socket.io')(serv);
+io.on('connection', function(socket){
+
+  socket.on('joinroom', function(code, username){
+    game.connectClient(code, socket, username);
+  });
+
+});
 
 // start the server
 serv.listen(config.port, function(){
