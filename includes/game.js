@@ -54,12 +54,12 @@ Room.prototype.startPhase0 = function(){
   }, 3000, this);
 }
 Room.prototype.startPhase1 = function(){
-  console.log('starting phase1');
   this.phase = 1;
   var d = Date.now();
   this.timer = d;
 
-  var answers = [].push(this.curquestion);
+  var answers = [];
+  answers.push(this.curquestion);
   var l = this.questions.length;
 
   while(answers.length < 4){

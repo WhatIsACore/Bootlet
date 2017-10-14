@@ -27,6 +27,7 @@ function changePanel(target){
 }
 var phases = document.getElementsByClassName('game-phase');
 function changePhase(target){
+  console.log('phase change: ' + target);
   var t = document.getElementById(target);
   for(var i in phases)
     if(phases[i].children)
