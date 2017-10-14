@@ -26,7 +26,7 @@ Room.prototype.checkVotes = function(){
       setTimeout(function(self){
         self.lobbystate = 1;
         self.initializeGame();
-      }, 1000, this);
+      }, 500, this);
     }
   }
 }
@@ -34,6 +34,7 @@ Room.prototype.initializeGame = function(){
   for(var i = 0, j = this.players.length; i < j; i++){
     this.players[i].socket.emit('gamestarted');
   }
+  this.startPhase0();
 }
 Room.prototype.startPhase0 = function(){
   this.phase = 0;
@@ -43,6 +44,7 @@ Room.prototype.startPhase0 = function(){
   this.timer = d;
 
   for(var i = 0, j = this.players.length; i < j; i++){
+    this.players[i].socket.emit('shuffle', this.questions);
     this.players[i].answer = -1;
     this.players[i].answerrank = 0;
     this.players[i].socket.emit('phase0', q, d);
@@ -209,8 +211,10 @@ function connectClient(code, socket, username){
 
       r.checkVotes();
 
-      if(r.players.length < 1)
+      if(r.players.length < 1){
+        clearTimeout(rooms[r.id].timeout);
         delete rooms[r.id];
+      }
 
       socket.disconnect();
     });
