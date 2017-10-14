@@ -53,6 +53,7 @@
   border-bottom: 3px solid #000;
   width: 50vw;
   margin: 5px auto;
+  padding: 10px;
 }
 .playerlist{
   text-align: center;
@@ -85,11 +86,16 @@
   display: none;
 }
 #question0{
+  font-size: 32px;
+  font-weight: 600;
+  height: 140px;
+}
+#question1{
   font-size: 24px;
   font-weight: 600;
   height: 120px;
 }
-#timer0{
+#timer0, #timer1{
   font-family: 'rye';
   font-size: 64px;
 }

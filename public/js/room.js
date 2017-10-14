@@ -113,9 +113,23 @@ setUsername.addEventListener('click', function(){
       time = d;
       question0.innerHTML = questions[curq].question;
       interval = setInterval(function(){
-        remainder = 3 - Math.ceil((Date.now() - time) / 1000);
+        var remainder = 3 - Math.ceil((Date.now() - time) / 1000);
         if(remainder > -1){
           timer0.innerHTML = remainder;
+        } else {
+          clearInterval(interval);
+        }
+      }, 1000);
+    });
+
+    socket.on('phase1', function(answers, d){
+      changePhase('phase1');
+      time = d;
+      question1.innerHTML = questions[curq].question;
+      interval = setInterval(function(){
+        var remainder = 3 - Math.ceil((Date.now() - time) / 1000);
+        if(remainder > -1){
+          timer1.innerHTML = remainder;
         } else {
           clearInterval(interval);
         }
