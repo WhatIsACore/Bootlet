@@ -8,10 +8,12 @@
 </div>
 
 <div class='gamepanel' id='lobby'>
+  <div id='playerlist'></div>
 </div>
 
 <div class='gamepanel' id='join-fail'>
   Failed to join. Room may be full.
+  <a href='/'><div class='form-button'>Back</div></a>
 </div>
 
 <% if(locals.params){ %>
@@ -19,5 +21,7 @@
     var params = <%- JSON.stringify(params) %>;
   </script>
 <% } %>
+
+<script src='room.js'></script>
 
 <% include ../public/partials/footer %>

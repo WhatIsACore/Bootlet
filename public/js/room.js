@@ -14,33 +14,36 @@ function changePanel(target){
 }
 
 var players = [];
-var Player = function(id, username){
+var Player = function(id, username, self){
   this.id = id;
   this.username = username;
+  this.self = false;
+  this.score = 0;
+  this.vote = false;
 }
+var playerlist = document.getElementById('playerlist');
 
 setUsername.addEventListener('click', function(){
-  console.log('hmmm');
   if(username.value.length > 0){
     socket = io();
     socket.emit('joinroom', params.code, username);
-    console.log('joining room');
 
     socket.on('joinfail', function(){
       changePanel('join-fail');
     });
 
-    socket.on('joinsuccess', function(playerlist){
+    socket.on('joinsuccess', function(playerlist, id, username){
       for(var i = 0, j = playerlist.length; i < j; i++){
         var p = playerlist[i];
-        players.push(new Player(p[0], p[1]));
+        players.push(new Player(p[0], p[1], false));
         changePanel('lobby');
         updatePlayers();
       }
+      players.push(id, username, true);
     });
 
     socket.on('newplayer', function(id, username){
-      players.push(new Player(id, username));
+      players.push(new Player(id, username, false));
       updatePlayers();
     });
 
@@ -62,5 +65,9 @@ setUsername.addEventListener('click', function(){
 });
 
 function updatePlayers(){
-  document.getElementById('lobby').innerHTML = players;
+  var res = '';
+  for(var i = 0, j = players.length; i < j; i++){
+    res += players[i].username;
+  }
+  playerlist.innerHTML = players;
 }

@@ -79,7 +79,7 @@ function connectClient(code, socket, username){
       r.players[i].socket.emit('newplayer', socket.id, username);
       currentPlayerList.push([r.players[i].id, r.players[i].socket.username]);
     }
-    socket.emit('joinsuccess', currentPlayerList);
+    socket.emit('joinsuccess', currentPlayerList, id, username);
     r.players.push(p);
 
     socket.on('vote', function(){
