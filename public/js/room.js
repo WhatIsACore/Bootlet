@@ -135,14 +135,10 @@ setUsername.addEventListener('click', function(){
       }
       answers1.innerHTML = res;
 
-      timer1.innerHTML = '';
-      clearInterval(inverval);
-      interval = setInterval(function(){
-        var remainder = 8 - Math.floor((Date.now() - time) / 1000);
-        if(remainder > -1){
-          timer1.innerHTML = remainder;
-        }
-      }, 100);
+      var remainder = (8 - (Date.now()-time)/1000) / 8 * 100;
+
+      timer1.style.backgroundColor = 'linear-gradient(90deg, #000 ' + remainder + '%, #fff ' + remainder + '%)';
+      clearInterval(interval);
     });
 
     socket.on('disconnect', function(){
