@@ -2,6 +2,7 @@
 
 var username = document.getElementById('username');
 var setUsername = document.getElementById('set-username');
+var voteReady = document.getElementById('vote-ready');
 var socket;
 
 var panels = document.getElementsByClassName('gamepanel');
@@ -14,12 +15,12 @@ function changePanel(target){
 }
 
 var players = [];
-var Player = function(id, username, self){
+var Player = function(id, username, vote, self){
   this.id = id;
   this.username = username;
+  this.vote = vote;
   this.self = false;
   this.score = 0;
-  this.vote = false;
 }
 var playerlist = document.getElementById('playerlist');
 
@@ -35,11 +36,11 @@ setUsername.addEventListener('click', function(){
     socket.on('joinsuccess', function(playerlist, id, username){
       for(var i = 0, j = playerlist.length; i < j; i++){
         var p = playerlist[i];
-        players.push(new Player(p[0], p[1], false));
+        players.push(new Player(p[0], p[1], p[2], false));
         changePanel('lobby');
         updatePlayers();
       }
-      players.push(id, username, true);
+      players.push(id, username, false, true);
     });
 
     socket.on('newplayer', function(id, username){
@@ -48,10 +49,21 @@ setUsername.addEventListener('click', function(){
     });
 
     socket.on('playerdisconnect', function(id){
-      for(var i = 0, j = playerlist.length; i < j; i++){
+      for(var i = 0, j = players.length; i < j; i++){
+        var p = players[i];
+        if(p.id === id){
+          players.splice(i, 1);
+          break;
+        }
+      }
+      updatePlayers();
+    });
+
+    socket.on('vote', function(id){
+      for(var i = 0, j = players.length; i < j; i++){
         var p = playerlist[i];
         if(p.id === id){
-          playerlist.splice(i, 1);
+          players[i].vote = true;
           break;
         }
       }
@@ -64,10 +76,14 @@ setUsername.addEventListener('click', function(){
   }
 });
 
+voteReady.addEventListener('click', function(){
+  socket.emit('vote');
+});
+
 function updatePlayers(){
   var res = '';
   for(var i = 0, j = players.length; i < j; i++){
-    res += players[i].username;
+    res += '<div class="player ' + players[i].vote + '">' + players[i].username + '</div>';
   }
   playerlist.innerHTML = players;
 }

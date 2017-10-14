@@ -18,7 +18,7 @@ Room.prototype.checkVotes = function(){
     for(var i = 0, j = this.players.length; i < j; i++){
       if(this.players[i].vote) votes++;
     }
-    if(votes * 2 > this.players.length){
+    if(votes === this.players.length){
       this.lobbystate = 1;
     }
   }
@@ -77,7 +77,7 @@ function connectClient(code, socket, username){
     var currentPlayerList = [];
     for(var i = 0, j = r.players.length; i < j; i++){
       r.players[i].socket.emit('newplayer', socket.id, username);
-      currentPlayerList.push([r.players[i].id, r.players[i].socket.username]);
+      currentPlayerList.push([r.players[i].id, r.players[i].socket.username, r.players[i].vote]);
     }
     socket.emit('joinsuccess', currentPlayerList, id, username);
     r.players.push(p);
@@ -85,6 +85,9 @@ function connectClient(code, socket, username){
     socket.on('vote', function(){
       socket.player.vote = true;
       r.checkVotes();
+      for(var i = 0, j = r.players.length; i < j; i++){
+        r.players[i].socket.emit('vote', socket.id);
+      }
     });
 
     socket.on('disconnect', function(){

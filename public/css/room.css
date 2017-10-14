@@ -30,6 +30,22 @@
   text-align: center;
 }
 
+.panel-heading{
+  width: calc(75%);
+  margin: 0px auto 20px;
+  font-size: 32px;
+  text-align: center;
+}
+.playerlist{
+  text-align: center;
+}
+.player{
+  font-size: 24px;
+}
+.player.true{
+  color: #0f0;
+}
+
 #choose-username, #join-fail{
   margin-top: 30vh
 }
