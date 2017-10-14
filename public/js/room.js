@@ -16,7 +16,7 @@ var timer1 = document.getElementById('timer1');
 var answers1 = document.getElementById('answers1');
 var question2 = document.getElementById('question2');
 var result2 = document.getElementById('result2');
-var desc2 = document.getElementById('chosen2');
+var desc2 = document.getElementById('desc2');
 
 var panels = document.getElementsByClassName('gamepanel');
 function changePanel(target){

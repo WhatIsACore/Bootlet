@@ -208,6 +208,14 @@ function connectClient(code, socket, username){
       p.answer = n;
       p.answerrank = r.answered;
       r.answered++;
+
+      if(r.answered === r.players.length && r.phase === 1)
+        setInterval(function(self){
+          if(self.phase === 1){
+            clearTimeout(self.timeout);
+            self.startPhase2();
+          }
+        }, 500, this);
     });
 
     socket.on('disconnect', function(){
