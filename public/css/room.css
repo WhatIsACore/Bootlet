@@ -85,12 +85,7 @@
 .game-phase:not(.active){
   display: none;
 }
-#question0{
-  font-size: 32px;
-  font-weight: 600;
-  height: 140px;
-}
-#question1{
+#question0, #question1{
   font-size: 24px;
   font-weight: 600;
   height: 120px;
