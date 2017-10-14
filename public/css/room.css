@@ -90,7 +90,22 @@
   font-weight: 600;
   height: 120px;
 }
-#timer0, #timer1{
+#timer0{
+  font-family: 'rye';
+  font-size: 128px;
+}
+#timer1{
   font-family: 'rye';
   font-size: 64px;
+}
+.answer-option{
+  width: calc(75% - 26px);
+  padding: 5px 10px;
+  margin: 10px auto;
+  border: 3px solid #000;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }

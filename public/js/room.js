@@ -126,6 +126,15 @@ setUsername.addEventListener('click', function(){
       changePhase('phase1');
       time = d;
       question1.innerHTML = questions[curq].question;
+
+      var res = '';
+      for(var i = 0; i < 4; i++){
+        res += '<div class="answer-option" data-value=' + answers[i] + '>';
+        res += questions[answers[i]].question;
+        res += '</div>';
+      }
+      answers.innerHTML = res;
+
       interval = setInterval(function(){
         var remainder = 8 - Math.floor((Date.now() - time) / 1000);
         if(remainder > -1){

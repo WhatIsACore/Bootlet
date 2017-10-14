@@ -67,7 +67,7 @@ Room.prototype.startPhase1 = function(){
   }
 
   for(var i = 0, j = this.players.length; i < j; i++)
-    this.players[i].socket.emit('phase1', answers, d);
+    this.players[i].socket.emit('phase1', shuffle(answers), d);
 
   this.timeout = setTimeout(function(self){
     self.startPhase2();
@@ -109,8 +109,10 @@ Room.prototype.evaluate = function(){
     this.lobbystate = 2;
     this.showResults();
   } else {
-    if(this.curquestion >= this.questions.length - 1)
+    if(this.curquestion >= this.questions.length - 1){
       this.questions = shuffle(this.questions);
+      this.curquestion = -1;
+    }
     this.startPhase0();
   }
 }
