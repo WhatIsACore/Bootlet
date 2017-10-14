@@ -72,14 +72,13 @@ function connectClient(code, socket, username){
   var r = rooms[code];
 
   if(r && r.lobbystate === 0 && r.players.length < 5){
-    r.players.push(socket);
 
     var currentPlayerList = [];
     for(var i = 0, j = r.players.length; i < j; i++){
       r.players[i].socket.emit('newplayer', socket.id, username);
       currentPlayerList.push([r.players[i].id, r.players[i].socket.username, r.players[i].vote]);
     }
-    socket.emit('joinsuccess', currentPlayerList, id, username);
+    socket.emit('joinsuccess', currentPlayerList, id, username, r.name);
     r.players.push(p);
 
     socket.on('vote', function(){

@@ -3,6 +3,7 @@
 var username = document.getElementById('username');
 var setUsername = document.getElementById('set-username');
 var voteReady = document.getElementById('vote-ready');
+var roomName = document.getElementById('room-name');
 var socket;
 
 var panels = document.getElementsByClassName('gamepanel');
@@ -33,12 +34,13 @@ setUsername.addEventListener('click', function(){
       changePanel('join-fail');
     });
 
-    socket.on('joinsuccess', function(playerlist, id, username){
+    socket.on('joinsuccess', function(playerlist, id, username, roomname){
       for(var i = 0, j = playerlist.length; i < j; i++){
         var p = playerlist[i];
         players.push(new Player(p[0], p[1], p[2], false));
         changePanel('lobby');
         updatePlayers();
+        roomName.innerHTML = roomname;
       }
       players.push(id, username, false, true);
     });

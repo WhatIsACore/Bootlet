@@ -46,6 +46,6 @@
   color: #0f0;
 }
 
-#choose-username, #join-fail{
-  margin-top: 30vh
+#choose-username, #join-fail, #lobby{
+  margin-top: 30vh;
 }
