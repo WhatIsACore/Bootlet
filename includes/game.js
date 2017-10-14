@@ -87,7 +87,7 @@ Room.prototype.startPhase2 = function(){
       var inc = Math.floor((10 / (rank+1)) - 0.1);
       p.score += inc;
       p.socket.emit('phase2', true, rank, inc, p.score);
-      tracker++;
+      rank++;
     } else {
       p.socket.emit('phase2', false, false, 0, p.score);
     }
@@ -222,7 +222,7 @@ function connectClient(code, socket, username){
             self.startPhase2();
           }
         }, 500, this);
-        
+
     });
 
     socket.on('disconnect', function(){
