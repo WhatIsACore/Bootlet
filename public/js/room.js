@@ -40,11 +40,11 @@ setUsername.addEventListener('click', function(){
       for(var i = 0, j = playerlist.length; i < j; i++){
         var p = currentplayerlist[i];
         players.push(new Player(p[0], p[1], p[2], false));
-        changePanel('lobby');
-        updatePlayers();
-        roomName.innerHTML = roomname;
       }
       players.push(new Player(id, uname, false, true));
+      changePanel('lobby');
+      updatePlayers();
+      roomName.innerHTML = roomname;
     });
 
     socket.on('newplayer', function(id, name){
