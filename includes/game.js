@@ -1,3 +1,4 @@
+var logger = require('winston');
 var mongoose = require('mongoose');
 var db_StudySets = require('../models/studysets')
 
@@ -19,17 +20,25 @@ function verify(code, fail, success){
 module.exports.verify = verify;
 
 function createRoom(code, fail, success){
-  db_StudySets.findOne({
-    id: code
-  }).
-  exec(function(err, studyset){
-    if(err) logger.log('info', err);
-    if(!result){
+  db_StudySets.count({'id': code}).
+  exec(function(err, n){
+    logger.log('info', 'hope');
+    if(err){
+      logger.log('info', err);
+      return fail();
+    }
+    if(n < 1){
       fail();
     } else {
-      var roomcode = Math.random().toString(36).slice(6);
-      rooms[roomcode] = new Room(roomcode, code);
-      success(roomcode);
+      db_StudySets.find({'id': code}).
+      select('name questions').
+      exec(function(err, studyset){
+        var roomcode = Math.random().toString(36).slice(6).toUpperCase();
+        rooms[roomcode] = new Room(roomcode, studyset);
+        logger.log('info', 'created new room ' + roomcode);
+        success(roomcode);
+      });
     }
   });
 }
+module.exports.createRoom = createRoom;

@@ -8,10 +8,10 @@ var questionSchema = new Schema({
   answer: String
 });
 var studySetSchema = new Schema({
-  id: {type: Number, required: true, unique: true, index: true},
+  id: {type: String, required: true, unique: true, index: true},
   name: {type: String, required: true},
   questions: {type: [questionSchema], required: true}
 });
 
-var studySet = mongoose.model('StudySet', studySetSchema);
+var studySet = mongoose.model('studySet', studySetSchema);
 module.exports = studySet;

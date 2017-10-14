@@ -13,7 +13,7 @@ enterGame.addEventListener('click', function(){
     req.open('GET', '/checkroom/' + gameCode.value.toUpperCase(), true);
     req.onreadystatechange = function(){
       if(req.readyState == XMLHttpRequest.DONE){
-        if(req.responseText === 'false'){
+        if(req.responseText === 'false' || !req.responseText){
           rejectRoom();
         } else {
           window.location.href = '/room/' + gameCode.value.toUpperCase();
@@ -30,7 +30,7 @@ function rejectRoom(){
   enterGame.innerHTML = 'Bad Code';
   setTimeout(function(){
     enterGame.innerHTML = 'Enter';
-  }, 2000)
+  }, 1500)
 }
 
 enterCreateGame.addEventListener('click', function(){
@@ -40,13 +40,14 @@ enterCreateGame.addEventListener('click', function(){
     req.open('GET', '/checkstudyset/' + studyCode.value.toUpperCase(), true);
     req.onreadystatechange = function(){
       if(req.readyState == XMLHttpRequest.DONE){
-        if(req.responseText === 'false'){
+        if(req.responseText === 'false' || !req.responseText){
           rejectGame();
         } else {
           window.location.href = '/room/' + req.responseText;
         }
       }
     }
+    req.send();
 
   } else {
     rejectGame();

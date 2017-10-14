@@ -3,10 +3,6 @@ const config = require('./includes/config');
 var routing = require('./includes/routing');
 var game = require('./includes/game');
 
-var express = require('express'),
-    app = express(),
-    serv = require('http').Server(app);
-
 // database
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -15,6 +11,12 @@ mongoose.connect(config.mongodb_key, {
   reconnectTries: Number.MAX_VALUE,
   useMongoClient: true
 });
+setInterval(function(){console.log(mongoose.connection.readyState);}, 1000);
+var db_StudySets = require('./models/studysets');
+
+var express = require('express'),
+    app = express(),
+    serv = require('http').Server(app);
 
 // configure view engine
 app.set('views', __dirname + '/public');
@@ -41,8 +43,7 @@ app.use('/css', express.static('public/css'))
       });
     })
     .get('/checkstudyset/*', function(req, res, next){
-      var code = routing.getPath(req.url);
-      game.createRoom(code, function(){
+      game.createRoom(routing.getPath(req.url), function(){
         res.status(200).send('false');
       }, function(room){
         res.status(200).send(room);
