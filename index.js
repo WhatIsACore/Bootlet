@@ -16,15 +16,41 @@ var db_StudySets = require('./models/studysets');
 var express = require('express'),
     app = express(),
     serv = require('http').Server(app);
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
 
 // configure view engine
 app.set('views', __dirname + '/public');
 app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
-app.use('/css', express.static('public/css'))
+app.use(upload.array())
+    .use('/css', express.static('public/css'))
     .use('/js', express.static('public/js'))
     .use('/img', express.static('public/img'))
+    .post('/submit', function(req, res, next){
+      var question = [];
+      for(var i in req.body)
+        if(i !== 'name')
+          question.push(req.body[i]);
+
+      var id = Math.random().toString(36).substr(2, 6).toUpperCase();
+      var studySet = {
+        name: req.body.name,
+        id: id,
+        questions: question
+      };
+      studySet = db_StudySets(studySet);
+
+      studySet.save(function(err){
+        if(err){
+          res.status(403).send('failed to save to database');
+        } else {
+          res.status(200).send(id);
+        }
+      });
+    })
     .get('/', routing.render('index', false, 'index'))
     .get('/create', routing.render('create', 'Create a Bootlet', 'create'))
     .get('/room/*', function(req, res, next){

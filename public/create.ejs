@@ -1,5 +1,30 @@
 <% include ../public/partials/header %>
 
-Create coming soon
+<div class='form' id='word-form'>
+  Name of Study Set:
+  <br>
+  <input type='text' maxlength='40' spellcheck='false' class='form-input' id='setname' placeholder='name'>
+  <br><br>
+  Terms / Definitions:
+  <br>
+  <div id='input-sets'>
+    <div class='input-set'>
+      <input type='text' maxlength='40' class='form-input term' placeholder='term'>
+      <input type='text' maxlength='40' class='form-input definition' placeholder='definition'>
+    </div>
+    <div class='input-set'>
+      <input type='text' maxlength='40' class='form-input term' placeholder='term'>
+      <input type='text' maxlength='40' class='form-input definition' placeholder='definition'>
+    </div>
+    <div class='input-set'>
+      <input type='text' maxlength='40' class='form-input term' placeholder='term'>
+      <input type='text' maxlength='40' class='form-input definition' placeholder='definition'>
+    </div>
+  </div>
+  <div class='form-button add-button' id='add-button'>Add More</div>
+  <div class='form-button' id='submit-button'>Submit</div>
+</div>
+
+<script src='/js/create.js'></script>
 
 <% include ../public/partials/footer %>
