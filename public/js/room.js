@@ -112,6 +112,14 @@ setUsername.addEventListener('click', function(){
       curq = q;
       time = d;
       question0.innerHTML = questions[curq].question;
+      interval = setInterval(function(){
+        remainder = 3 - Math.ceil((Date.now() - time) / 1000);
+        if(remainder > -1){
+          timer0.innerHTML = remainder;
+        } else {
+          clearInterval(interval);
+        }
+      })
     });
 
     socket.on('disconnect', function(){

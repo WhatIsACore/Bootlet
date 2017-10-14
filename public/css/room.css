@@ -84,3 +84,12 @@
 .game-phase:not(.active){
   display: none;
 }
+#question0{
+  font-size: 24px;
+  font-weight: 600;
+  height: 120px;
+}
+#timer0{
+  font-family: 'rye';
+  font-size: 64px;
+}
