@@ -76,3 +76,7 @@
 #game{
   margin-top: 5vh;
 }
+
+.game-phase:not(.active){
+  display: none;
+}

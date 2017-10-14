@@ -18,6 +18,7 @@ function changePanel(target){
 }
 
 var players = [];
+var self;
 var Player = function(id, username, vote, self){
   this.id = id;
   this.username = username;
@@ -37,12 +38,13 @@ setUsername.addEventListener('click', function(){
       changePanel('join-fail');
     });
 
-    socket.on('joinsuccess', function(currentplayerlist, id, uname, roomname){
+    socket.on('joinsuccess', function(currentplayerlist, cred, roomname){
       for(var i = 0, j = currentplayerlist.length; i < j; i++){
         var p = currentplayerlist[i];
-        players.push(new Player(p[0], p[1], p[2], false));
+        players.push(new Player(p.id, p.username, p.vote, false));
       }
-      players.push(new Player(id, uname, false, true));
+      self = new Player(cred.id, cred.username, false, true)
+      players.push(self);
       changePanel('lobby');
       updatePlayers();
       roomName.innerHTML = roomname;
