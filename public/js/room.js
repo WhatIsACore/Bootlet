@@ -119,7 +119,7 @@ setUsername.addEventListener('click', function(){
         } else {
           clearInterval(interval);
         }
-      })
+      }, 1000);
     });
 
     socket.on('disconnect', function(){
