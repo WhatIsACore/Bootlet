@@ -83,14 +83,13 @@ Room.prototype.startPhase2 = function(){
 
   for(var i = 0, j = this.players.length; i < j; i++){
     var p = this.players[i];
-    console.log(p.answer + ' / ' + this.curquestion);
     if(p.answer === this.curquestion){
       var inc = Math.floor((10 / (rank+1)) - 0.1);
       p.score += inc;
-      p.socket.emit('phase2', true, rank, inc);
+      p.socket.emit('phase2', true, rank, inc, p.score);
       tracker++;
     } else {
-      p.socket.emit('phase2', false);
+      p.socket.emit('phase2', false, false, 0, p.score);
     }
   }
 
@@ -224,8 +223,8 @@ function connectClient(code, socket, username){
       r.checkVotes();
 
       if(r.players.length < 1){
-        clearTimeout(rooms[r.id].timeout);
-        delete rooms[r.id];
+        clearTimeout(rooms[r.code].timeout);
+        delete rooms[r.code];
       }
 
       socket.disconnect();

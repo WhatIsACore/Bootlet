@@ -8,6 +8,7 @@ var joinCode = document.getElementById('join-code');
 joinCode.innerHTML = 'Join Code: <br><span class="roomcode-display">' + params.room + '</span>';
 var socket;
 
+var score = document.getElementById('score');
 var question0 = document.getElementById('question0');
 var timer0 = document.getElementById('timer0');
 var question1 = document.getElementById('question1');
@@ -15,7 +16,7 @@ var timer1 = document.getElementById('timer1');
 var answers1 = document.getElementById('answers1');
 var question2 = document.getElementById('question2');
 var result2 = document.getElementById('result2');
-var chosen2 = document.getElementById('chosen2');
+var desc2 = document.getElementById('chosen2');
 
 var panels = document.getElementsByClassName('gamepanel');
 function changePanel(target){
@@ -48,6 +49,7 @@ var playerlist = document.getElementById('playerlist');
 var questions = [];
 var curq = 0;
 var time = 0;
+var selected = -1;
 var interval;
 
 setUsername.addEventListener('click', function(){
@@ -109,6 +111,7 @@ setUsername.addEventListener('click', function(){
 
     socket.on('phase0', function(q){
       changePhase('phase0');
+      selected = -1;
       curq = q;
       time = Date.now();
       question0.innerHTML = questions[curq].question;
@@ -138,7 +141,8 @@ setUsername.addEventListener('click', function(){
       for(var i in options)
         if(options[i].children)
           options[i].addEventListener('click', function(){
-            socket.emit('answer', this.dataset.value);
+            socket.emit('answer', parseInt(this.dataset.value));
+            selected = this.dataset.value;
             for(var i in options)
               if(options[i].children)
                 options[i].className = 'answer-option grey';
@@ -152,11 +156,29 @@ setUsername.addEventListener('click', function(){
       }, 25);
     });
 
-    socket.on('phase2', function(correct, rank, inc){
+    socket.on('phase2', function(correct, rank, inc, newscore){
       changePhase('phase2');
       question2.innerHTML = questions[curq].question;
 
       result2.innerHTML = '<i class="fa fa-' + (correct ? 'check' : 'times') + '"></i>';
+      var expl = (selected > -1 ? 'no answer given' : questions[selected].answer) + '<br>';
+
+      var ranks = {
+        1: '1st',
+        2: '2nd',
+        3: '3rd',
+        4: '4th',
+        5: '5th'
+      };
+
+      if(correct){
+        expl += 'You were ' + ranks[rank] + ' and earned ' + inc + 'points';
+      } else {
+        expl += 'The correct answer was "' + questions[curq].answer + '". +0 points';
+      }
+
+      desc2.innerHTML = expl;
+      score.innerHTML = newscore;
 
       clearInterval(interval);
     });
