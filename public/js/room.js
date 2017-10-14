@@ -149,11 +149,15 @@ setUsername.addEventListener('click', function(){
       interval = setInterval(function(){
         var remainder = (8 - (Date.now()-time)/1000) / 8 * 100;
         timer1.style.background = 'linear-gradient(90deg, #000 ' + remainder + '%, #fff ' + remainder + '%)';
-      }, 100);
+      }, 25);
     });
 
     socket.on('phase2', function(correct, rank, inc){
       changePhase('phase2');
+      question2.innerHTML = questions[curq].question;
+
+      result2.innerHTML = '<i class="fa fa-' + (correct ? 'check' : 'times') + '"></i>';
+
       clearInterval(interval);
     });
 

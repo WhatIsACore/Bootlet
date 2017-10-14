@@ -99,6 +99,10 @@
   width: 75vw;
   margin: 10px auto;
 }
+#result2{
+  text-align: center;
+  font-size: 64px;
+}
 .answer-option{
   width: calc(75% - 26px);
   padding: 5px 10px;
@@ -110,6 +114,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
+.answer-option:hover{
+  background-color: #000;
+  color: #fff;
+}
 .answer-option.grey{
   opacity: 0.5s;
+  background-color: #888;
 }
