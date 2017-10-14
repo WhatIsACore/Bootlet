@@ -8,7 +8,7 @@ var joinCode = document.getElementById('join-code');
 joinCode.innerHTML = 'Join Code: <br><span class="roomcode-display">' + params.room + '</span>';
 var socket;
 
-var question0 = document.getElmentById('question0');
+var question0 = document.getElementById('question0');
 var timer0 = document.getElementById('timer0');
 var question1 = document.getElementById('question1');
 var timer1 = document.getElementById('timer1');
