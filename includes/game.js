@@ -23,8 +23,10 @@ Room.prototype.checkVotes = function(){
       if(this.players[i].vote) votes++;
     }
     if(votes === this.players.length){
-      this.lobbystate = 1;
-      this.initializeGame();
+      setTimeout(function(self){
+        self.lobbystate = 1;
+        self.initializeGame();
+      }, 1000, this);
     }
   }
 }
