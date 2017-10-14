@@ -113,6 +113,7 @@ setUsername.addEventListener('click', function(){
       curq = q;
       time = d;
       question0.innerHTML = questions[curq].question;
+      timer0.innerHTML = '';
       interval = setInterval(function(){
         var remainder = 3 - Math.floor((Date.now() - time) / 1000);
         if(remainder > -1){
@@ -120,7 +121,7 @@ setUsername.addEventListener('click', function(){
         } else {
           clearInterval(interval);
         }
-      }, 200);
+      }, 100);
     });
 
     socket.on('phase1', function(answers, d){
@@ -131,11 +132,12 @@ setUsername.addEventListener('click', function(){
       var res = '';
       for(var i = 0; i < 4; i++){
         res += '<div class="answer-option" data-value=' + answers[i] + '>';
-        res += questions[answers[i]].question;
+        res += questions[answers[i]].answer;
         res += '</div>';
       }
       answers1.innerHTML = res;
 
+      timer1.innerHTML = '';
       interval = setInterval(function(){
         var remainder = 8 - Math.floor((Date.now() - time) / 1000);
         if(remainder > -1){
@@ -143,7 +145,7 @@ setUsername.addEventListener('click', function(){
         } else {
           clearInterval(interval);
         }
-      }, 200);
+      }, 100);
     });
 
     socket.on('disconnect', function(){
