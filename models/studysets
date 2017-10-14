@@ -1,0 +1,17 @@
+// study set schema
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var questionSchema = new Schema({
+  question: String,
+  answer: String
+});
+var studySetSchema = new Schema({
+  id: {type: Number, required: true, unique: true, index: true},
+  name: {type: String, required: true},
+  questions: {type: [questionSchema], required: true}
+});
+
+var studySet = mongoose.model('StudySet', studySetSchema);
+module.exports = studySet;

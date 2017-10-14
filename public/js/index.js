@@ -4,6 +4,7 @@ var gameCode = document.getElementById('game-code');
 var studyCode = document.getElementById('study-code');
 var enterGame = document.getElementById('enter-game');
 var enterCreateGame = document.getElementById('enter-create-game');
+var newStudySet = document.getElementById('new-study-set');
 
 enterGame.addEventListener('click', function(){
   if(gameCode.value.length === 6){
@@ -19,6 +20,7 @@ enterGame.addEventListener('click', function(){
         }
       }
     }
+    req.send();
 
   } else {
     rejectRoom();
@@ -35,7 +37,7 @@ enterCreateGame.addEventListener('click', function(){
   if(studyCode.value.length === 6){
 
     var req = new XMLHttpRequest();
-    req.open('GET', '/checkstudy/' + studyCode.value.toUpperCase(), true);
+    req.open('GET', '/checkstudyset/' + studyCode.value.toUpperCase(), true);
     req.onreadystatechange = function(){
       if(req.readyState == XMLHttpRequest.DONE){
         if(req.responseText === 'false'){
@@ -56,6 +58,10 @@ function rejectGame(){
     enterCreateGame.innerHTML = 'Enter';
   }, 2000)
 }
+
+newStudySet.addEventListener('click', function(){
+  window.location.href = '/create';
+})
 
 var buttons = document.getElementsByClassName('form-button');
 var forms = document.getElementsByClassName('form');

@@ -11,3 +11,10 @@ function render(view, title, nav, params){
   return callback;
 }
 module.exports.render = render;
+
+// get last word in path from url
+function getPath(requrl){
+  requrl = url.parse(requrl).pathname.split('/');
+  return requrl[requrl.length-1];
+}
+module.exports.getPath = getPath;

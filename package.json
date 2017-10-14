@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/TheUberKid/Bootlet#readme",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "foreman": "^2.0.0",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.12.1",
     "winston": "^2.4.0"
   }
 }
