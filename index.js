@@ -56,6 +56,10 @@ io.on('connection', function(socket){
     game.connectClient(code, socket, username);
   });
 
+  socket.on('disconnect', function(){
+    socket.disconnect();
+  });
+
 });
 
 // start the server

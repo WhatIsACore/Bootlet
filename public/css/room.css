@@ -27,7 +27,9 @@
   outline: none;
   font-family: 'Rye';
   font-size: 24px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
   text-align: center;
+}
+
+#choose-username, #join-fail{
+  margin-top: 30vh
 }

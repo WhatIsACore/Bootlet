@@ -7,4 +7,14 @@
   <div class='form-button' id='set-username'>Continue</div>
 </div>
 
+<div class='gamepanel' id='join-fail'>
+  Failed to join. Room may be full.
+</div>
+
+<% if(locals.params){ %>
+  <script>
+    var params = <%- JSON.stringify(params) %>;
+  </script>
+<% } %>
+
 <% include ../public/partials/footer %>

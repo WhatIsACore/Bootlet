@@ -8,20 +8,27 @@ var Room = function(code, studyset){
   this.name = studyset.name;
   this.questions = studyset.questions;
   this.created = Date.now();
-  this.sockets = [];
+  this.players = [];
   this.lobbystate = 0; // 0 = lobby, 1 = game, 2 = results
   this.questionstage = 0; // 0 = question, 1 = answering, 2 = results
 }
 Room.prototype.checkVotes = function(){
-  if(this.sockets.length > 1 && this.state === 0){
+  if(this.players.length > 1 && this.state === 0){
     var votes = 0;
-    for(var i = 0, j = this.sockets.length; i < j; i++){
-      if(this.sockets[i].vote) votes++;
+    for(var i = 0, j = this.players.length; i < j; i++){
+      if(this.players[i].vote) votes++;
     }
-    if(votes * 2 > this.sockets.length){
+    if(votes * 2 > this.players.length){
       this.lobbystate = 1;
     }
   }
+}
+var Player = function(username, socket, id){
+  this.username = username;
+  this.socket = socket;
+  this.id = id;
+  this.vote = false;
+  this.score = 0;
 }
 
 function verify(code, fail, success){
@@ -58,26 +65,44 @@ function createRoom(code, fail, success){
 module.exports.createRoom = createRoom;
 
 function connectClient(code, socket, username){
-  socket.username = username;
+  var id = Math.round(Math.random()*100000);
+  var p = new Player(username, socket, id);
+  socket.player = p;
+  socket.id = id;
   var r = rooms[code];
+
   if(r && r.lobbystate === 0 && r.sockets.length < 5){
-    r.sockets.push(socket);
-    socket.score = 0;
-    socket.vote = false;
+    r.players.push(socket);
+
     var currentPlayerList = [];
-    for(var i = 0, j = r.sockets.length; i < j; i++){
-      r.sockets[i].emit('newplayer', socket.username);
-      currentPlayerList.push(r.sockets[i].username);
+    for(var i = 0, j = r.players.length; i < j; i++){
+      r.players[i].socket.emit('newplayer', username, socket.id);
+      currentPlayerList.push([r.players[i].id, r.players[i].socket.username]);
     }
     socket.emit('joinsuccess', currentPlayerList);
+    r.players.push(p);
 
     socket.on('vote', function(){
-      socket.vote = true;
+      socket.player.vote = true;
       r.checkVotes();
+    });
+
+    socket.on('disconnect', function(){
+      for(var i = 0, j = r.players.length; i < j; i++){
+        if(r.players[i].id === socket.id){
+          r.players.splice(i, 1);
+          break;
+        }
+      }
+      for(var i = 0, j = r.players.length; i < j; i++){
+        r.players[i].socket.emit('playerdisconnect', socket.id);
+      }
+      socket.disconnect();
     });
 
   } else {
     socket.emit('joinfail');
+    socket.disconnect();
   }
 }
 module.exports.connectClient = connectClient;
