@@ -72,7 +72,7 @@
   font-size: 128px;
 }
 
-#choose-username, #join-fail{
+#choose-username, #join-fail, #final-results{
   margin-top: 30vh;
 }
 #lobby{
@@ -103,6 +103,7 @@
 #result2{
   text-align: center;
   font-size: 96px;
+  margin-bottom: 10px;
 }
 #desc2{
   font-size: 24px;
@@ -126,4 +127,12 @@
 .answer-option.grey{
   opacity: 0.5s;
   background-color: #888;
+}
+
+#rank{
+  width: 60vw;
+  margin: 0px auto;
+  font-family: 'rye';
+  font-size: 24px;
+  text-align: left;
 }
