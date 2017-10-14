@@ -32,6 +32,8 @@
 
 .info{
   font-size: 24px;
+  width: 80vw;
+  margin: 0px auto;
 }
 .panel-heading{
   width: calc(75%);

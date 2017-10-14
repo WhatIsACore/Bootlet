@@ -13,13 +13,16 @@ var Room = function(code, studyset){
   this.questionstage = 0; // 0 = question, 1 = answering, 2 = results
 }
 Room.prototype.checkVotes = function(){
-  if(this.players.length > 1 && this.state === 0){
+  if(this.players.length > 1 && this.lobbystate === 0){
     var votes = 0;
     for(var i = 0, j = this.players.length; i < j; i++){
       if(this.players[i].vote) votes++;
     }
     if(votes === this.players.length){
       this.lobbystate = 1;
+      for(var i = 0, j = r.players.length; i < j; i++){
+        r.players[i].socket.emit('gamestarted');
+      }
     }
   }
 }

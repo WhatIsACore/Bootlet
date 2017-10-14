@@ -22,7 +22,7 @@ var Player = function(id, username, vote, self){
   this.id = id;
   this.username = username;
   this.vote = vote;
-  this.self = false;
+  this.self = self;
   this.score = 0;
 }
 var playerlist = document.getElementById('playerlist');
@@ -38,8 +38,7 @@ setUsername.addEventListener('click', function(){
     });
 
     socket.on('joinsuccess', function(currentplayerlist, id, uname, roomname){
-      console.log(currentplayerlist);
-      for(var i = 0, j = playerlist.length; i < j; i++){
+      for(var i = 0, j = currentplayerlist.length; i < j; i++){
         var p = currentplayerlist[i];
         players.push(new Player(p[0], p[1], p[2], false));
       }
@@ -50,7 +49,6 @@ setUsername.addEventListener('click', function(){
     });
 
     socket.on('newplayer', function(id, name){
-      console.log('new player: ' + id + ' / ' + name);
       players.push(new Player(id, name, false, false));
       updatePlayers();
     });
@@ -75,6 +73,10 @@ setUsername.addEventListener('click', function(){
         }
       }
       updatePlayers();
+    });
+
+    socket.on('gamestarted', function(){
+      changePanel('game');
     });
 
     socket.on('disconnect', function(){
