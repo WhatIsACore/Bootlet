@@ -161,7 +161,7 @@ setUsername.addEventListener('click', function(){
       question2.innerHTML = questions[curq].question;
 
       result2.innerHTML = '<i class="fa fa-' + (correct ? 'check' : 'times') + '"></i>';
-      var expl = (selected > -1 ? 'no answer given' : questions[selected].answer) + '<br>';
+      var expl = (selected > -1 ? questions[selected].answer : 'no answer given') + '<br>';
 
       var ranks = {
         1: '1st',
@@ -172,9 +172,9 @@ setUsername.addEventListener('click', function(){
       };
 
       if(correct){
-        expl += 'You were ' + ranks[rank] + ' and earned ' + inc + 'points';
+        expl += 'You were ' + ranks[rank] + '. <br>+' + inc + ' points';
       } else {
-        expl += 'The correct answer was "' + questions[curq].answer + '". +0 points';
+        expl += 'The correct answer was "' + questions[curq].answer + '".<br>+0 points';
       }
 
       desc2.innerHTML = expl;
