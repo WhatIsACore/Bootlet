@@ -207,8 +207,11 @@ function connectClient(code, socket, username){
       for(var i = 0, j = r.players.length; i < j; i++)
         r.players[i].socket.emit('playerdisconnect', socket.id);
 
+      r.checkVotes();
+
       if(r.players.length < 1)
         delete rooms[r.id];
+
       socket.disconnect();
     });
 
