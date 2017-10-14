@@ -99,7 +99,7 @@ Room.prototype.startPhase2 = function(){
 }
 Room.prototype.evaluate = function(){
   this.players.sort(function(a, b){
-    return a.score - b.score;
+    return b.score - a.score;
   });
   for(var i = 0, j = this.players.length; i < j; i++){
     var p = this.players[i];
