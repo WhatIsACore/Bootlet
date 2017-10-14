@@ -5,7 +5,7 @@ var setUsername = document.getElementById('set-username');
 var voteReady = document.getElementById('vote-ready');
 var roomName = document.getElementById('room-name');
 var joinCode = document.getElementById('join-code');
-joinCode.innerHTML = 'Join Code: ' + params.room;
+joinCode.innerHTML = 'Join Code: <br><span class="roomcode-display">' + params.room + '</span>';
 var socket;
 
 var panels = document.getElementsByClassName('gamepanel');

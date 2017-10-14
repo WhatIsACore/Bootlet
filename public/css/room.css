@@ -42,6 +42,10 @@
   text-align: center;
   font-family: 'rye';
 }
+.roomcode-display{
+  font-size: 32px;
+  letter-spacing: 0.35em;
+}
 #room-name{
   font-weight: 600;
 }
