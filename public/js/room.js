@@ -28,25 +28,27 @@ var playerlist = document.getElementById('playerlist');
 setUsername.addEventListener('click', function(){
   if(username.value.length > 0){
     socket = io();
-    socket.emit('joinroom', params.room, username);
+    socket.emit('joinroom', params.room, username.value);
 
     socket.on('joinfail', function(){
       changePanel('join-fail');
     });
 
-    socket.on('joinsuccess', function(playerlist, id, username, roomname){
+    socket.on('joinsuccess', function(currentplayerlist, id, username.value, roomname){
+      console.log(currentplayerlist);
       for(var i = 0, j = playerlist.length; i < j; i++){
-        var p = playerlist[i];
+        var p = currentplayerlist[i];
         players.push(new Player(p[0], p[1], p[2], false));
         changePanel('lobby');
         updatePlayers();
         roomName.innerHTML = roomname;
       }
-      players.push(new Player(id, username, false, true));
+      players.push(new Player(id, username.value, false, true));
     });
 
-    socket.on('newplayer', function(id, username){
-      players.push(new Player(id, username, false, false));
+    socket.on('newplayer', function(id, name){
+      console.log('new player: ' + id + ' / ' + name);
+      players.push(new Player(id, name, false, false));
       updatePlayers();
     });
 
