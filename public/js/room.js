@@ -27,7 +27,7 @@ var playerlist = document.getElementById('playerlist');
 setUsername.addEventListener('click', function(){
   if(username.value.length > 0){
     socket = io();
-    socket.emit('joinroom', params.code, username);
+    socket.emit('joinroom', params.room, username);
 
     socket.on('joinfail', function(){
       changePanel('join-fail');
