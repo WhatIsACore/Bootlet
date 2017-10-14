@@ -91,7 +91,7 @@ voteReady.addEventListener('click', function(){
 function updatePlayers(){
   var res = '';
   for(var i = 0, j = players.length; i < j; i++){
-    res += '<div class="player ' + players[i].vote + '">' + players[i].username + '</div>';
+    res += '<div class="player ' + players[i].vote + (players[i].self ? ' self' : '') + '">' + players[i].username + (players[i].vote ? ' (ready)' : '') + '</div>';
   }
   playerlist.innerHTML = res;
 }

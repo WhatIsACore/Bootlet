@@ -40,6 +40,9 @@
   text-align: center;
   font-family: 'rye';
 }
+#room-name{
+  font-weight: 600;
+}
 #current-players-text{
   border-bottom: 3px solid #000;
   width: 50vw;
@@ -52,7 +55,10 @@
   font-size: 24px;
 }
 .player.true{
-  color: #0f0;
+  color: #080;
+}
+.player.self{
+  font-weight: 600;
 }
 
 #choose-username, #join-fail{
