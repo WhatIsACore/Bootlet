@@ -20,6 +20,7 @@ var Player = function(id, username){
 }
 
 setUsername.addEventListener('click', function(){
+  console.log('hmmm');
   if(username.value.length > 0){
     socket = io();
     socket.emit('joinroom', params.code, username);

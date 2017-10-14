@@ -55,7 +55,7 @@ function createRoom(code, fail, success){
     if(studyset == null){
       fail();
     } else {
-      var roomcode = Math.random().toString(36).slice(6).toUpperCase();
+      var roomcode = Math.random().toString(36).substr(2, 6).toUpperCase();
       rooms[roomcode] = new Room(roomcode, code);
       logger.log('info', 'created new room ' + roomcode);
       success(roomcode);
