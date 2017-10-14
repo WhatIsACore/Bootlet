@@ -137,8 +137,7 @@ setUsername.addEventListener('click', function(){
       clearInterval(interval);
       interval = setInterval(function(){
         var remainder = (8 - (Date.now()-time)/1000) / 8 * 100;
-        console.log(remainder);
-        timer1.style.backgroundColor = 'linear-gradient(90deg, #000 ' + remainder + '%, #fff ' + remainder + '%)';
+        timer1.style.background = 'linear-gradient(90deg, #000 ' + remainder + '%, #fff ' + remainder + '%)';
       }, 100);
     });
 
