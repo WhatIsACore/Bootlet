@@ -134,6 +134,17 @@ setUsername.addEventListener('click', function(){
       }
       answers1.innerHTML = res;
 
+      var options = document.getElementsByClassName('answer-option');
+      for(var i in options)
+        if(options[i].children)
+          options[i].addEventListener('click', function(){
+            socket.emit('answer', this.dataset.value);
+            for(var i in options)
+              if(options[i].children)
+                options[i].className = 'answer-option grey';
+            this.className = 'answer-option';
+          });
+
       clearInterval(interval);
       interval = setInterval(function(){
         var remainder = (8 - (Date.now()-time)/1000) / 8 * 100;

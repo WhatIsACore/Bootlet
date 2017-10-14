@@ -11,6 +11,7 @@ var Room = function(code, studyset){
   this.players = [];
   this.lobbystate = 0; // 0 = lobby, 1 = game, 2 = results
   this.questionstage = 0; // 0 = question, 1 = answering, 2 = results
+  this.answered = 0;
   this.curquestion = -1;
   this.timer = 0;
   this.winner = null;
@@ -38,6 +39,7 @@ Room.prototype.initializeGame = function(){
 }
 Room.prototype.startPhase0 = function(){
   this.phase = 0;
+  this.answered = 0;
   this.curquestion++;
   var q = this.curquestion;
   this.timer = Date.now();
@@ -195,11 +197,17 @@ function connectClient(code, socket, username){
     r.players.push(p);
 
     socket.on('vote', function(){
-      socket.player.vote = true;
+      p.vote = true;
       for(var i = 0, j = r.players.length; i < j; i++)
         r.players[i].socket.emit('vote', socket.id);
 
       r.checkVotes();
+    });
+
+    socket.on('answer', function(n){
+      p.answer = n;
+      p.answerrank = r.answered;
+      r.answered++;
     });
 
     socket.on('disconnect', function(){
