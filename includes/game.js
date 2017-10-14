@@ -76,7 +76,7 @@ function connectClient(code, socket, username){
 
     var currentPlayerList = [];
     for(var i = 0, j = r.players.length; i < j; i++){
-      r.players[i].socket.emit('newplayer', username, socket.id);
+      r.players[i].socket.emit('newplayer', socket.id, username);
       currentPlayerList.push([r.players[i].id, r.players[i].socket.username]);
     }
     socket.emit('joinsuccess', currentPlayerList);

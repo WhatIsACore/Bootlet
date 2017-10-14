@@ -32,7 +32,25 @@ setUsername.addEventListener('click', function(){
       for(var i = 0, j = playerlist.length; i < j; i++){
         var p = playerlist[i];
         players.push(new Player(p[0], p[1]));
+        changePanel('lobby');
+        updatePlayers();
       }
+    });
+
+    socket.on('newplayer', function(id, username){
+      players.push(new Player(id, username));
+      updatePlayers();
+    });
+
+    socket.on('playerdisconnect', function(id){
+      for(var i = 0, j = playerlist.length; i < j; i++){
+        var p = playerlist[i];
+        if(p.id === id){
+          playerlist.splice(i, 1);
+          break;
+        }
+      }
+      updatePlayers();
     });
 
     socket.on('disconnect', function(){
@@ -40,3 +58,7 @@ setUsername.addEventListener('click', function(){
     })
   }
 });
+
+function updatePlayers(){
+  document.getElementById('lobby').innerHTML = players;
+}
