@@ -114,7 +114,7 @@ setUsername.addEventListener('click', function(){
       question0.innerHTML = questions[curq].question;
       timer0.innerHTML = '';
       interval = setInterval(function(){
-        var remainder = 3 - Math.floor((Date.now() - time) / 1000);
+        var remainder = 3 - Math.ceil((Date.now() - time) / 1000);
         if(remainder > -1){
           timer0.innerHTML = remainder;
         }
@@ -138,6 +138,7 @@ setUsername.addEventListener('click', function(){
       for(var i in options)
         if(options[i].children)
           options[i].addEventListener('click', function(){
+            console.log(this.dataset.value);
             socket.emit('answer', this.dataset.value);
             for(var i in options)
               if(options[i].children)
