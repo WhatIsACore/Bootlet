@@ -12,10 +12,10 @@ var question0 = document.getElementById('question0');
 var timer0 = document.getElementById('timer0');
 var question1 = document.getElementById('question1');
 var timer1 = document.getElementById('timer1');
-var answers = document.getElementById('answer');
+var answers1 = document.getElementById('answers1');
 var question2 = document.getElementById('question2');
-var result = document.getElementById('result');
-var chosen = document.getElementById('chosen');
+var result2 = document.getElementById('result2');
+var chosen2 = document.getElementById('chosen2');
 
 var panels = document.getElementsByClassName('gamepanel');
 function changePanel(target){
@@ -133,7 +133,7 @@ setUsername.addEventListener('click', function(){
         res += questions[answers[i]].question;
         res += '</div>';
       }
-      answers.innerHTML = res;
+      answers1.innerHTML = res;
 
       interval = setInterval(function(){
         var remainder = 8 - Math.floor((Date.now() - time) / 1000);
