@@ -27,7 +27,6 @@ function changePanel(target){
 }
 var phases = document.getElementsByClassName('game-phase');
 function changePhase(target){
-  console.log('phase change: ' + target);
   var t = document.getElementById(target);
   for(var i in phases)
     if(phases[i].children)
@@ -108,10 +107,10 @@ setUsername.addEventListener('click', function(){
       questions = q;
     });
 
-    socket.on('phase0', function(q, d){
+    socket.on('phase0', function(q){
       changePhase('phase0');
       curq = q;
-      time = d;
+      time = Date.now();
       question0.innerHTML = questions[curq].question;
       timer0.innerHTML = '';
       interval = setInterval(function(){
@@ -122,9 +121,9 @@ setUsername.addEventListener('click', function(){
       }, 100);
     });
 
-    socket.on('phase1', function(answers, d){
+    socket.on('phase1', function(answers){
       changePhase('phase1');
-      time = d;
+      time = Date.now();
       question1.innerHTML = questions[curq].question;
 
       var res = '';
@@ -138,6 +137,7 @@ setUsername.addEventListener('click', function(){
       clearInterval(interval);
       interval = setInterval(function(){
         var remainder = (8 - (Date.now()-time)/1000) / 8 * 100;
+        console.log(remainder);
         timer1.style.backgroundColor = 'linear-gradient(90deg, #000 ' + remainder + '%, #fff ' + remainder + '%)';
       }, 100);
     });

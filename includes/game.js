@@ -39,15 +39,14 @@ Room.prototype.initializeGame = function(){
 Room.prototype.startPhase0 = function(){
   this.phase = 0;
   this.curquestion++;
-  var d = Date.now();
   var q = this.curquestion;
-  this.timer = d;
+  this.timer = Date.now();
 
   for(var i = 0, j = this.players.length; i < j; i++){
     this.players[i].socket.emit('shuffle', this.questions);
     this.players[i].answer = -1;
     this.players[i].answerrank = 0;
-    this.players[i].socket.emit('phase0', q, d);
+    this.players[i].socket.emit('phase0', q);
   }
   this.timeout = setTimeout(function(self){
     self.startPhase1();
@@ -55,8 +54,7 @@ Room.prototype.startPhase0 = function(){
 }
 Room.prototype.startPhase1 = function(){
   this.phase = 1;
-  var d = Date.now();
-  this.timer = d;
+  this.timer = Date.now();
 
   var answers = [];
   answers.push(this.curquestion);
@@ -68,7 +66,7 @@ Room.prototype.startPhase1 = function(){
   }
 
   for(var i = 0, j = this.players.length; i < j; i++)
-    this.players[i].socket.emit('phase1', shuffle(answers), d);
+    this.players[i].socket.emit('phase1', shuffle(answers));
 
   this.timeout = setTimeout(function(self){
     self.startPhase2();

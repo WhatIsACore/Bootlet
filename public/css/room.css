@@ -97,6 +97,7 @@
 #timer1{
   height: 3px;
   width: 80vw;
+  margin: 0px auto;
 }
 .answer-option{
   width: calc(75% - 26px);
