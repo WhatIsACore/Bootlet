@@ -18,6 +18,7 @@ Room.prototype.checkVotes = function(){
     for(var i = 0, j = this.players.length; i < j; i++){
       if(this.players[i].vote) votes++;
     }
+    logger.log('info', votes);
     if(votes === this.players.length){
       this.lobbystate = 1;
       for(var i = 0, j = r.players.length; i < j; i++){
@@ -86,10 +87,10 @@ function connectClient(code, socket, username){
 
     socket.on('vote', function(){
       socket.player.vote = true;
-      r.checkVotes();
       for(var i = 0, j = r.players.length; i < j; i++){
         r.players[i].socket.emit('vote', socket.id);
       }
+      r.checkVotes();
     });
 
     socket.on('disconnect', function(){

@@ -62,10 +62,17 @@
 .player.self{
   font-weight: 600;
 }
+#score{
+  font-family: 'rye';
+  font-size: 128px;
+}
 
 #choose-username, #join-fail{
   margin-top: 30vh;
 }
 #lobby{
   margin-top: 20vh;
+}
+#game{
+  margin-top: 5vh;
 }

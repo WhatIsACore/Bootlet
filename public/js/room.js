@@ -68,7 +68,7 @@ setUsername.addEventListener('click', function(){
       for(var i = 0, j = players.length; i < j; i++){
         var p = players[i];
         if(p.id === id){
-          players[i].vote = true;
+          p.vote = true;
           break;
         }
       }
