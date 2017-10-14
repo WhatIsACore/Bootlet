@@ -1,0 +1,12 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Open Sans';
+}
+a{
+  text-decoration: none;
+}
+.logo{
+  font-family: 'Rye';
+  text-transform: uppercase;
+}

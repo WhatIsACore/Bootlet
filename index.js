@@ -14,7 +14,8 @@ app.set('view engine', 'ejs');
 app.use('/css', express.static('public/css'))
     .use('/js', express.static('public/js'))
     .use('/img', express.static('public/img'))
-    .get('/', routing.render('index', false, false));
+    .get('/', routing.render('index', false, 'index'))
+    .get('/create', routing.render('create', 'Create a Bootlet', 'create'));
 
 // start the server
 serv.listen(config.port, function(){
