@@ -47,7 +47,7 @@ Room.prototype.startPhase0 = function(){
   for(var i = 0, j = this.players.length; i < j; i++){
     this.players[i].socket.emit('shuffle', this.questions);
     this.players[i].answer = -1;
-    this.players[i].answerrank = 0;
+    this.players[i].answerrank = 6;
     this.players[i].socket.emit('phase0', q);
   }
   this.timeout = setTimeout(function(self){
@@ -83,6 +83,7 @@ Room.prototype.startPhase2 = function(){
 
   for(var i = 0, j = this.players.length; i < j; i++){
     var p = this.players[i];
+    console.log(p.answer + ' / ' + this.curquestion);
     if(p.answer === this.curquestion){
       var inc = Math.floor((10 / (rank+1)) - 0.1);
       p.score += inc;
@@ -138,7 +139,7 @@ var Player = function(username, socket, id){
   this.vote = false;
   this.score = 0;
   this.answer = -1;
-  this.answerrank = -1;
+  this.answerrank = 6;
 }
 
 function verify(code, fail, success){

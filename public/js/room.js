@@ -138,7 +138,6 @@ setUsername.addEventListener('click', function(){
       for(var i in options)
         if(options[i].children)
           options[i].addEventListener('click', function(){
-            console.log(this.dataset.value);
             socket.emit('answer', this.dataset.value);
             for(var i in options)
               if(options[i].children)
