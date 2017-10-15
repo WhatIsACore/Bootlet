@@ -32,11 +32,13 @@ app.use(upload.array())
     .post('/submit', function(req, res, next){
       var question = [];
       for(var i in req.body)
-        if(i !== 'name')
-          question.push({
+        if(i !== 'name'){
+          var q = {
             question: req.body[i].question,
             answer: req.body[i].answer
-          });
+          };
+          question.push(q);
+        }
 
       var id = Math.random().toString(36).substr(2, 6).toUpperCase();
       var studySet = {
