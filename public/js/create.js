@@ -34,6 +34,7 @@ submitButton.addEventListener('click', function(){
     req.open('POST', '/submit', true);
     req.onreadystatechange = function(){
       if(req.readyState == XMLHttpRequest.DONE){
+        document.body.innerHTML = '<div class="form">Your Study Code is: ' + req.responseText + '</div>';
       }
     }
     req.send(data);

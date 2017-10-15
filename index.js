@@ -45,7 +45,7 @@ app.use(upload.array())
 
       studySet.save(function(err){
         if(err){
-          res.status(403).send('failed to save to database');
+          res.status(404).send('failed to save to database');
         } else {
           res.status(200).send(id);
         }
